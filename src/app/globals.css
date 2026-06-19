@@ -19,10 +19,17 @@
   --color-deep-navy: #111827;
   --color-signal-red: #d72638;
   --color-chrome-silver: #c9c9c9;
+}
 
-  /* Typography */
+/*
+ * Fonts use `@theme inline` so the font-display / font-sans / font-mono
+ * utilities inline `var(--font-*)` directly. The actual values are injected
+ * at runtime by next/font on <body>, so they only resolve on descendants,
+ * not at :root. Without `inline` every font silently falls back to system ui.
+ */
+@theme inline {
   --font-display: var(--font-anton), "Arial Narrow", sans-serif;
-  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-archivo), ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-space-mono), ui-monospace, monospace;
 }
 
@@ -42,7 +49,7 @@ html {
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-sans);
+  font-family: var(--font-archivo), ui-sans-serif, system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
 }

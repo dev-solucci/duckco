@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Anton, Inter, Space_Mono } from "next/font/google";
+import { Anton, Archivo, Space_Mono } from "next/font/google";
 import { brand } from "@/lib/brand";
 import "./globals.css";
 
@@ -10,10 +10,10 @@ const anton = Anton({
   variable: "--font-anton",
 });
 
-// Body: clean, legible, e-commerce friendly.
-const inter = Inter({
+// Body: athletic grotesque that echoes the wordmark. Legible for e-commerce.
+const archivo = Archivo({
   subsets: ["latin"],
-  variable: "--font-inter",
+  variable: "--font-archivo",
 });
 
 // Technical: ticket, race plate, lucky numbers, SKUs, meters.
@@ -25,8 +25,8 @@ const spaceMono = Space_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: `${brand.name} — ${brand.slogan}`,
-    template: `%s — ${brand.shortName}`,
+    default: `${brand.name} · ${brand.slogan}`,
+    template: `%s · ${brand.shortName}`,
   },
   description: brand.positioning,
 };
@@ -37,7 +37,7 @@ export default function RootLayout({
   return (
     <html lang="pt-BR">
       <body
-        className={`${anton.variable} ${inter.variable} ${spaceMono.variable}`}
+        className={`${anton.variable} ${archivo.variable} ${spaceMono.variable}`}
       >
         {children}
       </body>

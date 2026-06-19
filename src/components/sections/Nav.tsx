@@ -40,11 +40,11 @@ export function Nav() {
       )}
     >
       <nav className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6">
-        <a href="#top" className="flex items-center gap-2 text-duck-cream">
+        <a href="#top" className="flex items-center gap-1 text-duck-cream">
           <MaskedAsset
             src={brandAssets.symbol.src}
             label="Luke"
-            className="h-8 w-8 text-lucky-yellow"
+            className="h-9 w-9 text-lucky-yellow"
           />
           <MaskedAsset
             src={brandAssets.wordmark.src}
