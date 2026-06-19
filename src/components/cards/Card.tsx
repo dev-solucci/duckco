@@ -82,21 +82,21 @@ const STAT_KEYS = [
 function CardArt({ card }: { card: CardDef }) {
   const cls = "text-duck-cream/90";
   if (card.art === "clover")
-    return <Clover className={cn("h-[55%] w-[55%]", cls)} strokeWidth={1.25} />;
+    return <Clover className={cn("h-1/2 w-1/2", cls)} strokeWidth={1.25} />;
   if (card.art === "coin")
-    return <Coins className={cn("h-[55%] w-[55%]", cls)} strokeWidth={1.25} />;
+    return <Coins className={cn("h-1/2 w-1/2", cls)} strokeWidth={1.25} />;
   if (card.art === "ticket")
-    return <Ticket className={cn("h-[55%] w-[55%]", cls)} strokeWidth={1.25} />;
+    return <Ticket className={cn("h-1/2 w-1/2", cls)} strokeWidth={1.25} />;
   if (card.art === "seven")
     return (
-      <span className="font-display text-[44cqi] leading-none text-lucky-yellow">
+      <span className="font-display text-6xl leading-none text-lucky-yellow">
         7
       </span>
     );
   return (
     <span
       aria-hidden
-      className={cn("mask-asset h-[68%] w-[68%]", cls)}
+      className={cn("mask-asset h-[78%] w-[78%]", cls)}
       style={{ "--asset": `url(${brandAssets.symbol.src})` } as React.CSSProperties}
     />
   );
@@ -107,20 +107,20 @@ function CardBack({ className }: { className?: string }) {
   return (
     <div
       className={cn(
-        "relative aspect-[5/7] w-full overflow-hidden rounded-[5%] bg-gradient-to-br from-deep-green via-lucky-black to-lucky-black [container-type:inline-size]",
+        "relative flex aspect-[5/7] w-full items-stretch overflow-hidden rounded-xl bg-gradient-to-br from-deep-green via-lucky-black to-lucky-black p-1.5",
         className,
       )}
     >
-      <div className="absolute inset-[3.5cqi] flex flex-col items-center justify-center gap-[4cqi] rounded-[4%] border-[0.6cqi] border-lucky-yellow/30">
+      <div className="flex flex-1 flex-col items-center justify-center gap-2 rounded-lg border border-lucky-yellow/25">
         <span
           aria-hidden
-          className="mask-asset h-[40%] w-[40%] text-lucky-yellow/80"
+          className="mask-asset h-2/5 w-2/5 text-lucky-yellow/80"
           style={{ "--asset": `url(${brandAssets.symbol.src})` } as React.CSSProperties}
         />
-        <span className="font-display text-[9cqi] uppercase tracking-[0.2em] text-duck-cream/70">
+        <span className="font-display text-[11px] uppercase tracking-[0.2em] text-duck-cream/70">
           Lucky Cards
         </span>
-        <span className="font-mono text-[4cqi] uppercase tracking-[0.3em] text-lucky-yellow/60">
+        <span className="font-mono text-[7px] uppercase tracking-[0.3em] text-lucky-yellow/60">
           Duck Co.
         </span>
       </div>
@@ -147,7 +147,7 @@ export function Card({
   return (
     <article
       className={cn(
-        "relative flex aspect-[5/7] w-full select-none flex-col gap-[2.2cqi] overflow-hidden rounded-[5%] border-[0.8cqi] p-[3.2cqi] [container-type:inline-size]",
+        "relative flex aspect-[5/7] w-full select-none flex-col gap-1 overflow-hidden rounded-xl border-2 p-1.5",
         frame.ring,
         rarity.border,
         rarity.glow,
@@ -156,90 +156,84 @@ export function Card({
     >
       {rarity.foil && <span className="foil-sheen" />}
 
-        {/* Title bar */}
-        <div
-          className={cn(
-            "flex items-center justify-between gap-[2cqi] rounded-[2cqi] bg-gradient-to-r px-[3cqi] py-[2cqi] shadow-[inset_0_0_0_0.4cqi_rgba(0,0,0,0.25)]",
-            frame.title,
-          )}
-        >
-          <h3 className="truncate font-display text-[7.2cqi] uppercase leading-none text-duck-cream">
-            {card.name}
-          </h3>
-          <span className="flex h-[11cqi] w-[11cqi] shrink-0 items-center justify-center rounded-full border-[0.5cqi] border-lucky-black/40 bg-duck-cream text-lucky-black shadow">
-            <Clover className="h-[6cqi] w-[6cqi]" strokeWidth={2} />
-          </span>
-        </div>
+      {/* Title bar */}
+      <div
+        className={cn(
+          "flex items-center justify-between gap-1 rounded-md bg-gradient-to-r px-1.5 py-1",
+          frame.title,
+        )}
+      >
+        <h3 className="truncate font-display text-[11px] uppercase leading-none text-duck-cream">
+          {card.name}
+        </h3>
+        <span className="flex h-4 w-4 shrink-0 items-center justify-center rounded-full border border-lucky-black/40 bg-duck-cream text-lucky-black">
+          <Clover className="h-2.5 w-2.5" strokeWidth={2} />
+        </span>
+      </div>
 
-        {/* Art window */}
-        <div
-          className={cn(
-            "relative flex flex-1 items-center justify-center overflow-hidden rounded-[1.5cqi] border-[0.6cqi] border-lucky-black/50",
-            frame.art,
-          )}
-        >
-          <div className="pointer-events-none absolute inset-0 shadow-[inset_0_0_8cqi_rgba(0,0,0,0.45)]" />
-          <CardArt card={card} />
-          {count > 1 && (
-            <span className="absolute bottom-[2cqi] right-[2cqi] rounded-[1cqi] bg-lucky-black/75 px-[2cqi] py-[0.8cqi] font-mono text-[4cqi] font-bold text-lucky-yellow">
-              x{count}
-            </span>
-          )}
-        </div>
-
-        {/* Type line */}
-        <div className="flex items-center justify-between rounded-[1.5cqi] bg-lucky-black/45 px-[3cqi] py-[1.6cqi]">
-          <span className="font-mono text-[4cqi] uppercase tracking-widest text-duck-cream">
-            {typeLabel[card.type]}
+      {/* Art window */}
+      <div
+        className={cn(
+          "relative flex flex-1 items-center justify-center overflow-hidden rounded-sm border border-lucky-black/50",
+          frame.art,
+        )}
+      >
+        <div className="pointer-events-none absolute inset-0 shadow-[inset_0_0_18px_rgba(0,0,0,0.45)]" />
+        <CardArt card={card} />
+        {count > 1 && (
+          <span className="absolute bottom-1 right-1 rounded-[2px] bg-lucky-black/75 px-1 py-0.5 font-mono text-[8px] font-bold leading-none text-lucky-yellow">
+            x{count}
           </span>
-          <span className="flex items-center gap-[2cqi]">
-            <span className="font-mono text-[3.4cqi] uppercase tracking-wider text-duck-cream/70">
-              {rarity.label}
-            </span>
-            <span
-              className={cn("h-[3.4cqi] w-[3.4cqi] rotate-45 rounded-[0.6cqi]", rarity.gem)}
-            />
-          </span>
-        </div>
+        )}
+      </div>
 
-        {/* Text box (parchment) */}
-        <div className="flex flex-col gap-[1.6cqi] rounded-[1.5cqi] bg-duck-cream px-[3cqi] py-[2.4cqi] text-lucky-black">
-          {card.ability && (
-            <p className="text-[4cqi] font-semibold leading-tight">
-              {card.ability}
-            </p>
-          )}
-          <p className="text-[3.7cqi] italic leading-snug text-lucky-black/70">
-            {card.line}
-          </p>
-          <div className="mt-[1cqi] grid grid-cols-4 gap-[1.2cqi] border-t border-lucky-black/15 pt-[1.6cqi]">
-            {STAT_KEYS.map(([key, short]) => (
-              <div key={key} className="flex flex-col items-center leading-none">
-                <span className="font-mono text-[2.8cqi] uppercase tracking-wider text-lucky-black/55">
-                  {short}
-                </span>
-                <span className="font-display text-[6cqi] text-money-green">
-                  {card.stats[key]}
-                </span>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Collector line */}
-        <div className="flex items-center justify-between px-[1cqi] font-mono text-[2.9cqi] uppercase tracking-widest text-duck-cream/80">
-          <span>{card.number}</span>
-          <span className="flex items-center gap-[1.5cqi]">
-            Lucky Drop 001
-            <span
-              aria-hidden
-              className="mask-asset h-[4.5cqi] w-[4.5cqi] text-duck-cream/80"
-              style={
-                { "--asset": `url(${brandAssets.symbol.src})` } as React.CSSProperties
-              }
-            />
+      {/* Type line */}
+      <div className="flex items-center justify-between rounded-sm bg-lucky-black/45 px-1.5 py-0.5">
+        <span className="font-mono text-[8px] uppercase tracking-widest text-duck-cream">
+          {typeLabel[card.type]}
+        </span>
+        <span className="flex items-center gap-1">
+          <span className="font-mono text-[7px] uppercase tracking-wider text-duck-cream/70">
+            {rarity.label}
           </span>
+          <span className={cn("h-2 w-2 rotate-45 rounded-[1px]", rarity.gem)} />
+        </span>
+      </div>
+
+      {/* Text box (parchment) */}
+      <div className="flex flex-col gap-0.5 rounded-sm bg-duck-cream px-1.5 py-1 text-lucky-black">
+        {card.ability && (
+          <p className="text-[8px] font-semibold leading-tight">{card.ability}</p>
+        )}
+        <p className="line-clamp-2 text-[7px] italic leading-snug text-lucky-black/70">
+          {card.line}
+        </p>
+        <div className="mt-0.5 grid grid-cols-4 gap-0.5 border-t border-lucky-black/15 pt-1">
+          {STAT_KEYS.map(([key, short]) => (
+            <div key={key} className="flex flex-col items-center leading-none">
+              <span className="font-mono text-[6px] uppercase tracking-wider text-lucky-black/55">
+                {short}
+              </span>
+              <span className="font-display text-[13px] leading-none text-money-green">
+                {card.stats[key]}
+              </span>
+            </div>
+          ))}
         </div>
+      </div>
+
+      {/* Collector line */}
+      <div className="flex items-center justify-between px-0.5 font-mono text-[6px] uppercase tracking-widest text-duck-cream/80">
+        <span>{card.number}</span>
+        <span className="flex items-center gap-1">
+          Lucky Drop 001
+          <span
+            aria-hidden
+            className="mask-asset h-2 w-2 text-duck-cream/80"
+            style={{ "--asset": `url(${brandAssets.symbol.src})` } as React.CSSProperties}
+          />
+        </span>
+      </div>
     </article>
   );
 }
