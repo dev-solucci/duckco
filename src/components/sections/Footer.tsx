@@ -40,7 +40,7 @@ export function Footer() {
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-12">
           {/* Brand + newsletter */}
           <div className="lg:col-span-5">
-            <div className="flex items-center gap-1.5 text-lucky-yellow">
+            <div className="flex items-center text-lucky-yellow">
               <MaskedAsset
                 src={brandAssets.symbol.src}
                 label="Luke"
@@ -49,7 +49,7 @@ export function Footer() {
               <MaskedAsset
                 src={brandAssets.wordmark.src}
                 label="Duck Co."
-                className="h-6 w-28 text-duck-cream"
+                className="-ml-2 h-6 w-28 text-duck-cream"
               />
             </div>
             <p className="mt-5 max-w-sm font-sans text-sm text-chrome-silver">

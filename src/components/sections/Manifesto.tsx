@@ -2,11 +2,10 @@ import { Reveal } from "@/components/ui/Reveal";
 import { brandAssets } from "@/data/assets";
 
 const lines = [
-  "A sorte também é presença.",
-  "É chegar no rolê do jeito certo.",
+  "Sorte é postura.",
   "É cair de pé.",
-  "É perder o caminho e achar uma entrada melhor.",
-  "É vestir uma peça como se ela fosse amuleto.",
+  "É a rua abrir pro Luke.",
+  "É vestir o amuleto.",
 ];
 
 export function Manifesto() {
@@ -38,10 +37,8 @@ export function Manifesto() {
           ))}
         </div>
         <Reveal delay={0.4}>
-          <p className="mt-10 max-w-xl font-sans text-base text-duck-cream/80">
-            Não vendemos só camiseta. Vendemos sorte vestida de rua. O nosso
-            mascote é Luke, o pato sortudo. Bonito, confiante, malandro e sempre
-            um passo à frente do azar.
+          <p className="mt-10 max-w-md font-sans text-base text-duck-cream/80">
+            A gente não vende camiseta. Vende sorte vestida de rua.
           </p>
         </Reveal>
         <Reveal delay={0.5}>

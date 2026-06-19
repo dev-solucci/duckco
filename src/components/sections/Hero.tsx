@@ -40,7 +40,7 @@ export function Hero() {
             </span>
           </motion.div>
 
-          <h1 className="font-display uppercase leading-[0.82] text-duck-cream">
+          <h1 className="font-display uppercase leading-[0.95] text-duck-cream">
             {["Too", "Lucky", "To Lose"].map((word, i) => (
               <motion.span
                 key={word}
