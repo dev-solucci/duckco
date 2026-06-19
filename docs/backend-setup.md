@@ -39,7 +39,37 @@ put the service role key in a `NEXT_PUBLIC_` variable.
 
 ## Auth method
 
-Decide one to start (can add more later):
-- **Magic link (email):** simplest, no passwords. Recommended.
-- **OAuth (Google / Apple):** one tap, needs provider setup in Supabase.
-- **Email + password:** classic, more friction.
+Chosen: **Google and Apple OAuth**. The app code is wired (`/entrar`, the
+callback route, the nav account control). To make sign in actually work you must
+enable the provider in the dashboard.
+
+### Google (simplest, do this first)
+
+1. In Google Cloud Console, create an OAuth 2.0 Client ID (type: Web).
+2. Add this **Authorized redirect URI** exactly:
+   `https://vnuqycphghyjsmwymvcf.supabase.co/auth/v1/callback`
+3. Copy the Client ID and Client Secret.
+4. In Supabase: **Authentication > Providers > Google** > enable > paste the
+   Client ID and Secret > save.
+
+### Apple
+
+Heavier: needs an Apple Developer account, a Service ID, a Sign in with Apple
+key, the Team ID and Key ID. Enable it in **Authentication > Providers > Apple**
+with those values. Do Google first; add Apple later.
+
+### App URLs (required)
+
+Our app redirects back to `window.location.origin + /auth/callback`. Supabase
+only allows redirect URLs on an allowlist, so run the dev server on a **stable
+port** and register it.
+
+1. Run the app on a fixed origin, for example `http://localhost:3000`.
+2. In Supabase: **Authentication > URL Configuration**:
+   - **Site URL:** `http://localhost:3000`
+   - **Redirect URLs:** add `http://localhost:3000/auth/callback`
+   - Add the production URL the same way when you deploy.
+
+Note: the preview here runs on a random port (3000 was busy), which will not
+match the allowlist. For real login testing, free port 3000 (or pick a fixed
+port) and register that exact URL.
