@@ -38,6 +38,14 @@
 - Regras do projeto reforçadas: nunca usar hífen em texto visível, comentários
   ou commits; nunca emojis; sempre inovar em design e usabilidade.
 - Documentação viva criada (empresa, marca, arquitetura, histórico, roadmap).
+- Central de documentação dentro do site em `/docs`, fora do menu.
+- Decisão de comércio: Shopify headless. Cliente da Storefront API montado.
+
+### Lançamento
+- **Site no ar na Vercel:** `https://duckco.vercel.app`. Repositório
+  `dev-solucci/duckco`, deploy automático a cada push. Variáveis do Supabase
+  configuradas na Vercel. Falta apenas registrar as URLs de produção no Supabase
+  para o login funcionar online.
 
 ## Como manter
 
