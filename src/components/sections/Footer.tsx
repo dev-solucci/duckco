@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { ArrowRight } from "lucide-react";
 import { MaskedAsset } from "@/components/brand/MaskedAsset";
 import { Marquee } from "@/components/ui/Marquee";
@@ -96,13 +97,23 @@ export function Footer() {
           ))}
         </div>
 
-        <div className="mt-14 flex flex-col items-start justify-between gap-4 border-t border-duck-cream/10 pt-6 sm:flex-row sm:items-center">
-          <span className="font-mono text-[0.65rem] uppercase tracking-widest text-chrome-silver">
-            {brand.name} · Lote No. {luckyNumber(brand.name)}
-          </span>
-          <span className="font-mono text-[0.65rem] uppercase tracking-widest text-chrome-silver">
-            {brand.slogan}
-          </span>
+        <div className="mt-14 flex items-end justify-between gap-4 border-t border-duck-cream/10 pt-6">
+          <div className="flex flex-col gap-1 font-mono text-[0.65rem] uppercase tracking-widest text-chrome-silver sm:flex-row sm:gap-6">
+            <span>
+              {brand.name} · Lote No. {luckyNumber(brand.name)}
+            </span>
+            <span>{brand.slogan}</span>
+          </div>
+
+          {/* Worn rubber stamp, slapped on slightly crooked */}
+          <Image
+            src={brandAssets.stamp.src}
+            alt={brandAssets.stamp.alt}
+            width={140}
+            height={140}
+            aria-hidden
+            className="pointer-events-none w-16 shrink-0 -rotate-[9deg] opacity-95 drop-shadow-[0_6px_14px_rgba(0,0,0,0.45)] sm:-mt-12 sm:w-24 lg:w-28"
+          />
         </div>
       </div>
     </footer>

@@ -53,6 +53,13 @@ export const brandAssets = {
     alt: "Luke, the Luck Duck",
     monochrome: false,
   },
+  /** Circular worn stamp of Luke's head, for a rubber stamp accent. */
+  stamp: {
+    id: "stamp",
+    src: "/brand/stamp-duck.png",
+    alt: "Duck Co. carimbo",
+    monochrome: false,
+  },
 } satisfies Record<string, BrandAsset>;
 
 export type BrandAssetId = keyof typeof brandAssets;
