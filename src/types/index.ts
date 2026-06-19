@@ -49,6 +49,56 @@ export interface MascotVariant {
 
 export type CulturalTerritory = "japan" | "uk" | "usa" | "brazil";
 
+// --- Lucky Cards (the card game) ---------------------------------------
+
+export type CardType = "persona" | "gear" | "charm" | "scene";
+
+/** Rarity in drop / hype language, ordered from common to grail. */
+export type CardRarity = "street" | "drop" | "chrome" | "grail";
+
+export interface CardStats {
+  estilo: number;
+  sorte: number;
+  flow: number;
+  hype: number;
+}
+
+export interface CardDef {
+  /** kebab-case id, e.g. "luke-rich". */
+  id: string;
+  name: string;
+  type: CardType;
+  rarity: CardRarity;
+  /** Race plate serial, e.g. "007 / 250". */
+  number: string;
+  stats: CardStats;
+  /** Short flavor / comic line. */
+  line: string;
+  /** Persona variant id, or charm glyph key, used to pick the art. */
+  art?: string;
+  /** Special ability text (personas / rares), used later by the duel. */
+  ability?: string;
+}
+
+/** One slot in a comic page: fixed art panel or a card slot. */
+export type AlbumPanel =
+  | { kind: "art"; caption: string; span?: number }
+  | { kind: "slot"; cardId: string; caption: string; span?: number };
+
+export interface AlbumPage {
+  panels: AlbumPanel[];
+}
+
+export interface AlbumChapter {
+  id: string;
+  title: string;
+  /** The drop / arc this chapter tells. */
+  subtitle: string;
+  pages: AlbumPage[];
+  /** Reward unlocked when every slot in the chapter is filled. */
+  reward: string;
+}
+
 export type ProductCategory =
   | "tee"
   | "hoodie"

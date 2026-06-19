@@ -178,7 +178,18 @@ entrar a conta.
 
 ---
 
-## 9. Riscos e cuidados
+## 9. Decisões travadas (2026-06-19)
+
+- **Começar pela Fase 1:** o Álbum HQ + coleção, single player, estado local.
+- **Multiplayer assíncrono** (por vez) quando chegar o duelo.
+- **Backend: Supabase** na Fase 2.
+- **Mecânica do duelo: Fit Check com sorte** (Top Trumps + sorte + habilidades).
+
+Build da Fase 1 (estado local, `useSyncExternalStore` + localStorage, igual à
+sorte): set inicial de cartas, abertura de packs, coleção e o álbum em quadrinho
+do capítulo Origem. Rota dedicada `/cartas`. Modelado para migrar ao Supabase.
+
+## 10. Riscos e cuidados
 
 - **Loot box / cassino:** não vender packs aleatórios pagos. Packs por compra de
   produto e engajamento. Mantém bom gosto e foge de regulação.

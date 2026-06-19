@@ -11,8 +11,8 @@ import { cn } from "@/lib/utils";
 
 const links = [
   { label: "Drop", href: "/#drop" },
+  { label: "Cartas", href: "/cartas" },
   { label: "Clube", href: "/#clube" },
-  { label: "Coleção", href: "/#colecao" },
   { label: "Manifesto", href: "/#manifesto" },
 ];
 
