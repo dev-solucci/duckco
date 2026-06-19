@@ -27,6 +27,7 @@
 ### Tecnologia
 - [Arquitetura, stack, rotas e banco de dados](architecture.md)
 - [Setup do backend Supabase](backend-setup.md)
+- [Publicação e deploy (checklist)](deploy.md)
 - Schema do banco: [`supabase/schema.sql`](../supabase/schema.sql)
 
 ### Processo
