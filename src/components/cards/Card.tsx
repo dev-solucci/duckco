@@ -30,35 +30,35 @@ const frameByType: Record<
   },
 };
 
-// Rarity controls the card stock rim, the gem and the foil.
+// Rarity controls the border, the gem and the foil.
 const rarityByName: Record<
   CardRarity,
-  { label: string; rim: string; gem: string; foil: boolean; glow: string }
+  { label: string; border: string; gem: string; foil: boolean; glow: string }
 > = {
   street: {
     label: "Street",
-    rim: "from-zinc-600 via-zinc-800 to-zinc-900",
+    border: "border-duck-cream/25",
     gem: "bg-chrome-silver",
     foil: false,
     glow: "",
   },
   drop: {
     label: "Drop",
-    rim: "from-[#caa024] via-[#8a6c14] to-[#3a2e08]",
+    border: "border-lucky-yellow",
     gem: "bg-lucky-yellow",
     foil: false,
     glow: "shadow-[0_8px_30px_-8px_var(--color-lucky-yellow)]",
   },
   chrome: {
     label: "Chrome",
-    rim: "from-zinc-200 via-zinc-400 to-zinc-600",
+    border: "border-chrome-silver",
     gem: "bg-chrome-silver",
     foil: true,
     glow: "shadow-[0_8px_34px_-8px_var(--color-chrome-silver)]",
   },
   grail: {
     label: "Grail · 1 of 1",
-    rim: "from-[#f6d56b] via-[#caa024] to-[#7c5e10]",
+    border: "border-lucky-yellow",
     gem: "bg-lucky-yellow",
     foil: true,
     glow: "shadow-[0_10px_44px_-6px_var(--color-lucky-yellow)]",
@@ -147,20 +147,14 @@ export function Card({
   return (
     <article
       className={cn(
-        "relative aspect-[5/7] w-full select-none rounded-[5%] bg-gradient-to-br p-[3cqi] [container-type:inline-size]",
-        rarity.rim,
+        "relative flex aspect-[5/7] w-full select-none flex-col gap-[2.2cqi] overflow-hidden rounded-[5%] border-[0.8cqi] p-[3.2cqi] [container-type:inline-size]",
+        frame.ring,
+        rarity.border,
         rarity.glow,
         className,
       )}
     >
-      {/* Colored inner frame */}
-      <div
-        className={cn(
-          "relative flex h-full flex-col gap-[2.2cqi] overflow-hidden rounded-[4%] p-[3cqi]",
-          frame.ring,
-        )}
-      >
-        {rarity.foil && <span className="foil-sheen" />}
+      {rarity.foil && <span className="foil-sheen" />}
 
         {/* Title bar */}
         <div
@@ -246,7 +240,6 @@ export function Card({
             />
           </span>
         </div>
-      </div>
     </article>
   );
 }
