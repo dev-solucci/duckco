@@ -22,6 +22,28 @@
 - **Trade e gift** de cartas entre membros.
 - **Temporadas** de cartas atreladas aos drops.
 
+## Comércio (futuro, já considerado na arquitetura)
+
+A marca vai **vender de verdade**, com integração de envio e gestão de estoque.
+Hoje os produtos são dados estáticos em `src/data/drops.ts` e mostram "Em breve".
+Para evitar retrabalho, o caminho pensado é:
+
+- **Catálogo no banco:** migrar produtos para tabelas no Supabase com
+  variantes (tamanho, cor), preço e **estoque** por variante. O mesmo padrão
+  já usado para cartas e contas.
+- **Pedidos e checkout:** tabelas de `orders` e `order_items`, reserva de
+  estoque no momento do pedido, status de pagamento e de envio.
+- **Pagamento (Brasil):** Mercado Pago ou Stripe, com **Pix**, cartão e boleto.
+- **Envio (Brasil):** integração com **Melhor Envio** (ou Correios) para cálculo
+  de frete por CEP, etiqueta e rastreio.
+- **Estoque:** baixa automática ao confirmar pagamento, alerta de baixo estoque.
+- **Fiscal:** emissão de nota (NF e), via serviço como Bling ou similar.
+
+Decisão em aberto: construir tudo sobre o Supabase (mais controle, mais
+trabalho) ou usar uma base headless de e commerce. A stack atual (Next.js mais
+Supabase) suporta as duas. Nada do que existe hoje impede esse caminho; o salto
+principal é tirar o catálogo do código e levar para o banco com estoque.
+
 ## Institucional
 
 - Termos de uso, política de privacidade e LGPD, trocas, frete.
