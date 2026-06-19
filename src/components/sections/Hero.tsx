@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { Marquee } from "@/components/ui/Marquee";
 import { LuckyBadge } from "@/components/ui/LuckyBadge";
+import { HeroProductCard } from "@/components/sections/HeroProductCard";
 import { brandAssets } from "@/data/assets";
 import { brand } from "@/lib/brand";
 import { luckyNumber } from "@/data/game";
@@ -33,7 +34,7 @@ export function Hero() {
         <div className="absolute inset-0 bg-gradient-to-t from-lucky-black via-lucky-black/20 to-lucky-black/40" />
       </div>
 
-      <div className="relative mx-auto w-full max-w-7xl flex-1 px-4 py-10 sm:px-6 lg:flex lg:items-center">
+      <div className="relative mx-auto flex w-full max-w-7xl flex-1 flex-col justify-center px-4 py-10 sm:px-6">
         {/* Copy */}
         <div className="max-w-2xl lg:max-w-xl">
           <motion.div
@@ -99,6 +100,9 @@ export function Hero() {
             </a>
           </motion.div>
         </div>
+
+        {/* Floating featured product */}
+        <HeroProductCard className="mt-10 w-full sm:max-w-sm lg:mt-0 lg:absolute lg:bottom-12 lg:right-0 lg:w-80" />
       </div>
 
       {/* Ticker */}

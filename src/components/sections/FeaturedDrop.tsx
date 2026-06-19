@@ -1,27 +1,17 @@
 "use client";
 
+import Link from "next/link";
 import { Plus, Check } from "lucide-react";
 import { useState } from "react";
 import { Reveal } from "@/components/ui/Reveal";
 import { LuckyBadge } from "@/components/ui/LuckyBadge";
+import { ProductMedia } from "@/components/product/ProductMedia";
 import { featuredDrop } from "@/data/drops";
 import { luckyNumber } from "@/data/game";
-import { brandAssets } from "@/data/assets";
 import { useLuck } from "@/lib/luck";
-import type { ProductCategory } from "@/types";
+import { categoryLabel, toneForIndex } from "@/lib/product";
+import type { DropItem } from "@/types";
 import { cn } from "@/lib/utils";
-
-const categoryLabel: Record<ProductCategory, string> = {
-  tee: "Camiseta",
-  hoodie: "Moletom",
-  cap: "Boné",
-  jacket: "Jaqueta",
-  pants: "Calça",
-  accessory: "Acessório",
-};
-
-// Alternating media tones, racing kit feel.
-const tones = ["bg-deep-green", "bg-duck-cream", "bg-street-brown"];
 
 export function FeaturedDrop() {
   return (
@@ -46,14 +36,8 @@ export function FeaturedDrop() {
 
         <div className="grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4">
           {featuredDrop.items.map((item, i) => (
-            <Reveal key={item.name} delay={(i % 4) * 0.06}>
-              <ProductCard
-                name={item.name}
-                description={item.description}
-                category={item.category}
-                tone={tones[i % tones.length]}
-                index={i}
-              />
+            <Reveal key={item.slug} delay={(i % 4) * 0.06}>
+              <ProductCard item={item} index={i} />
             </Reveal>
           ))}
         </div>
@@ -62,21 +46,10 @@ export function FeaturedDrop() {
   );
 }
 
-function ProductCard({
-  name,
-  description,
-  category,
-  tone,
-  index,
-}: {
-  name: string;
-  description: string;
-  category: ProductCategory;
-  tone: string;
-  index: number;
-}) {
+function ProductCard({ item, index }: { item: DropItem; index: number }) {
   const { addLuck } = useLuck();
   const [saved, setSaved] = useState(false);
+  const tone = toneForIndex(index);
 
   function save() {
     if (saved) return;
@@ -86,25 +59,19 @@ function ProductCard({
 
   return (
     <div className="group flex flex-col border-2 border-duck-cream/12 transition hover:border-lucky-yellow">
-      <div className={cn("relative aspect-[4/5] overflow-hidden", tone)}>
-        <span className="absolute left-2 top-2 z-10">
-          <LuckyBadge
-            className={tone === "bg-duck-cream" ? "text-lucky-black" : "text-duck-cream"}
-          >
-            {String(index + 1).padStart(2, "0")}
-          </LuckyBadge>
-        </span>
-
-        {/* Mascot watermark, drifts on hover */}
-        <span
-          aria-hidden
-          className={cn(
-            "mask-asset absolute inset-6 transition-transform duration-500 group-hover:scale-105 group-hover:-rotate-3",
-            tone === "bg-duck-cream" ? "text-lucky-black/15" : "text-duck-cream/15",
-          )}
-          style={{ "--asset": `url(${brandAssets.symbol.src})` } as React.CSSProperties}
-        />
-
+      <div className="relative">
+        <Link
+          href={`/produto/${item.slug}`}
+          aria-label={item.name}
+          className="block"
+        >
+          <ProductMedia
+            tone={tone}
+            number={String(index + 1).padStart(2, "0")}
+            hover
+            className="aspect-[4/5]"
+          />
+        </Link>
         <button
           onClick={save}
           aria-label={saved ? "Na lista" : "Salvar na lista"}
@@ -121,17 +88,19 @@ function ProductCard({
 
       <div className="flex flex-1 flex-col gap-1 bg-lucky-black p-3">
         <span className="font-mono text-[0.6rem] uppercase tracking-widest text-lucky-yellow">
-          {categoryLabel[category]}
+          {categoryLabel[item.category]}
         </span>
-        <h3 className="font-display text-lg uppercase leading-tight text-duck-cream">
-          {name}
-        </h3>
+        <Link href={`/produto/${item.slug}`}>
+          <h3 className="font-display text-lg uppercase leading-tight text-duck-cream transition hover:text-lucky-yellow">
+            {item.name}
+          </h3>
+        </Link>
         <p className="line-clamp-2 font-sans text-xs text-chrome-silver/80">
-          {description}
+          {item.description}
         </p>
         <div className="mt-2 flex items-center justify-between border-t border-duck-cream/10 pt-2">
           <span className="font-mono text-[0.6rem] uppercase tracking-widest text-chrome-silver">
-            No. {luckyNumber(name)}
+            No. {luckyNumber(item.name)}
           </span>
           <span className="font-display text-sm uppercase text-lucky-yellow">
             Em breve

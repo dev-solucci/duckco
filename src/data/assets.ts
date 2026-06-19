@@ -56,3 +56,11 @@ export const brandAssets = {
 } satisfies Record<string, BrandAsset>;
 
 export type BrandAssetId = keyof typeof brandAssets;
+
+/** Club level emblem, keyed by club level id (see src/data/game.ts). */
+export const levelBadges: Record<string, string> = {
+  rookie: "/brand/badges/rookie.png",
+  lucky: "/brand/badges/lucky.png",
+  "hot-streak": "/brand/badges/hot-streak.png",
+  "too-lucky": "/brand/badges/tltl.png",
+};

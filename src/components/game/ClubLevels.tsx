@@ -1,13 +1,15 @@
 "use client";
 
+import Image from "next/image";
 import { clubLevels } from "@/data/game";
+import { levelBadges } from "@/data/assets";
 import { useLuck } from "@/lib/luck";
 import { cn } from "@/lib/utils";
 
 export function ClubLevels() {
   const { level, luck } = useLuck();
   return (
-    <ul className="flex flex-col">
+    <ul className="flex flex-col gap-1">
       {clubLevels.map((l) => {
         const current = l.id === level.id;
         const reached = luck >= l.min;
@@ -15,7 +17,7 @@ export function ClubLevels() {
           <li
             key={l.id}
             className={cn(
-              "flex items-center gap-4 border-l-4 py-3 pl-4 transition",
+              "flex items-center gap-3 border-l-4 py-2 pl-3 transition",
               current
                 ? "border-money-green bg-money-green/10"
                 : reached
@@ -23,6 +25,20 @@ export function ClubLevels() {
                   : "border-lucky-black/15",
             )}
           >
+            <div
+              className={cn(
+                "relative h-12 w-12 shrink-0 transition",
+                reached ? "opacity-100" : "opacity-40 grayscale",
+              )}
+            >
+              <Image
+                src={levelBadges[l.id]}
+                alt={`Badge ${l.name}`}
+                fill
+                sizes="48px"
+                className="object-contain"
+              />
+            </div>
             <span
               className={cn(
                 "font-mono text-xs font-bold tabular-nums",

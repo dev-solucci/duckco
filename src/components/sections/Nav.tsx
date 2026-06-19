@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import { AnimatePresence, motion, useMotionValueEvent, useScroll } from "framer-motion";
 import { Menu, ShoppingBag, X } from "lucide-react";
 import { MaskedAsset } from "@/components/brand/MaskedAsset";
@@ -9,10 +10,10 @@ import { brandAssets } from "@/data/assets";
 import { cn } from "@/lib/utils";
 
 const links = [
-  { label: "Drop", href: "#drop" },
-  { label: "Clube", href: "#clube" },
-  { label: "Coleção", href: "#colecao" },
-  { label: "Manifesto", href: "#manifesto" },
+  { label: "Drop", href: "/#drop" },
+  { label: "Clube", href: "/#clube" },
+  { label: "Coleção", href: "/#colecao" },
+  { label: "Manifesto", href: "/#manifesto" },
 ];
 
 export function Nav() {
@@ -40,7 +41,7 @@ export function Nav() {
       )}
     >
       <nav className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6">
-        <a href="#top" className="flex items-center text-duck-cream">
+        <Link href="/" className="flex items-center text-duck-cream">
           <MaskedAsset
             src={brandAssets.symbol.src}
             label="Luke"
@@ -51,7 +52,7 @@ export function Nav() {
             label="Duck Co."
             className="-ml-1.5 h-4 w-20"
           />
-        </a>
+        </Link>
 
         <div className="hidden items-center gap-8 md:flex">
           {links.map((l) => (

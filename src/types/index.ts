@@ -58,6 +58,8 @@ export type ProductCategory =
   | "accessory";
 
 export interface DropItem {
+  /** Stable url slug, e.g. "camiseta-preta-oversized". */
+  slug: string;
   name: string;
   category: ProductCategory;
   description: string;

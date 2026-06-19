@@ -10,36 +10,43 @@ export const drops: Drop[] = [
     status: "upcoming",
     items: [
       {
+        slug: "camiseta-preta-oversized",
         name: "Camiseta Preta Oversized",
         category: "tee",
         description: "Duck Co. no peito, Luke grande nas costas.",
       },
       {
+        slug: "camiseta-creme-luke-classic",
         name: "Camiseta Creme Luke Classic",
         category: "tee",
         description: "Luke Classic com a frase Too Lucky To Lose.",
       },
       {
+        slug: "moletom-patch-luke",
         name: "Moletom com Patch do Luke",
         category: "hoodie",
         description: "Cinza ou preto, patch bordado do Luke.",
       },
       {
+        slug: "bone-cabeca-luke",
         name: "Boné Cabeça do Luke",
         category: "cap",
         description: "Preto, cabeça do Luke bordada na frente.",
       },
       {
+        slug: "jaqueta-coach-lucky-duck-club",
         name: "Jaqueta Coach Lucky Duck Club",
         category: "jacket",
         description: "Lucky Duck Club nas costas.",
       },
       {
+        slug: "meias-pegada-de-pato",
         name: "Meias Pegada de Pato",
         category: "accessory",
         description: "Pequeno símbolo de pegada de pato.",
       },
       {
+        slug: "pack-stickers-luke",
         name: "Pack de Stickers do Luke",
         category: "accessory",
         description: "Variações do Luke.",
@@ -112,3 +119,16 @@ export const dropById = Object.fromEntries(
 ) as Record<string, Drop>;
 
 export const featuredDrop = drops[0];
+
+/** All sellable items across every drop, paired with their drop. */
+export const allProducts = drops.flatMap((drop) =>
+  drop.items.map((item) => ({ item, drop })),
+);
+
+/** Look up a product (and its drop) by item slug. */
+export function findProductBySlug(slug: string) {
+  return allProducts.find(({ item }) => item.slug === slug) ?? null;
+}
+
+/** The single hero highlight: the black oversized tee. */
+export const heroProduct = featuredDrop.items[0];
