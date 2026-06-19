@@ -39,10 +39,11 @@ Para evitar retrabalho, o caminho pensado é:
 - **Estoque:** baixa automática ao confirmar pagamento, alerta de baixo estoque.
 - **Fiscal:** emissão de nota (NF e), via serviço como Bling ou similar.
 
-Decisão em aberto: construir tudo sobre o Supabase (mais controle, mais
-trabalho) ou usar uma base headless de e commerce. A stack atual (Next.js mais
-Supabase) suporta as duas. Nada do que existe hoje impede esse caminho; o salto
-principal é tirar o catálogo do código e levar para o banco com estoque.
+**Decisão tomada (2026 06 19): Shopify headless.** O Shopify cuida de catálogo,
+estoque, pedidos, pagamento e frete, com painel pronto; a nossa vitrine Next.js
+lê os produtos pela Storefront API. Detalhes em
+[commerce-shopify.md](commerce-shopify.md). O salto principal é tirar o catálogo
+do código (`src/data/drops.ts`) e ler do Shopify.
 
 ## Institucional
 

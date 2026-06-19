@@ -35,6 +35,7 @@ export const docSections: DocSection[] = [
     docs: [
       { slug: "architecture", title: "Arquitetura", blurb: "Stack, rotas e banco de dados" },
       { slug: "backend-setup", title: "Backend Supabase", blurb: "Setup e OAuth" },
+      { slug: "commerce-shopify", title: "Comércio Shopify", blurb: "Produtos, estoque e checkout" },
       { slug: "deploy", title: "Publicação", blurb: "Checklist de deploy" },
     ],
   },

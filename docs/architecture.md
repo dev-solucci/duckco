@@ -64,6 +64,14 @@ Definição completa em [`supabase/schema.sql`](../supabase/schema.sql). Resumo:
 Segurança por linha (RLS) em todas as tabelas. As definições das cartas (o set)
 ficam no código (`src/data/cards.ts`); o banco guarda só posse, decks e partidas.
 
+## Comércio
+
+Decisão: **Shopify headless** (ver [commerce-shopify.md](commerce-shopify.md)).
+O Shopify guarda catálogo, estoque, pedidos, pagamento e frete; o site lê pela
+Storefront API e usa o checkout do Shopify. Hoje os produtos ainda são estáticos
+em `src/data/drops.ts`; serão trocados pelos dados reais do Shopify. O clube e as
+cartas seguem no Supabase, ligados ao Shopify por webhook de pedido pago.
+
 ## Autenticação
 
 OAuth Google e Apple via Supabase. Sessão mantida por cookies e renovada no
