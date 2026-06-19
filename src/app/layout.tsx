@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
-import { Anton, Inter } from "next/font/google";
+import { Anton, Inter, Space_Mono } from "next/font/google";
 import { brand } from "@/lib/brand";
 import "./globals.css";
 
-// Display: bold, condensed, urban — logo, headlines, prints.
+// Display: bold, condensed, urban. Logo, headlines, prints.
 const anton = Anton({
   weight: "400",
   subsets: ["latin"],
@@ -14,6 +14,13 @@ const anton = Anton({
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-inter",
+});
+
+// Technical: ticket, race plate, lucky numbers, SKUs, meters.
+const spaceMono = Space_Mono({
+  weight: ["400", "700"],
+  subsets: ["latin"],
+  variable: "--font-space-mono",
 });
 
 export const metadata: Metadata = {
@@ -29,7 +36,11 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="pt-BR">
-      <body className={`${anton.variable} ${inter.variable}`}>{children}</body>
+      <body
+        className={`${anton.variable} ${inter.variable} ${spaceMono.variable}`}
+      >
+        {children}
+      </body>
     </html>
   );
 }
