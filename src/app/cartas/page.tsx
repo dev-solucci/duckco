@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { Swords } from "lucide-react";
 import { Nav } from "@/components/sections/Nav";
 import { Footer } from "@/components/sections/Footer";
@@ -89,20 +90,23 @@ export default function CardsPage() {
           <div className="mx-auto flex max-w-7xl flex-col items-start gap-4 sm:flex-row sm:items-center sm:justify-between">
             <div>
               <span className="font-mono text-xs uppercase tracking-widest text-lucky-yellow">
-                Em breve
+                Jogável agora · protótipo
               </span>
               <h2 className="mt-2 font-display text-4xl uppercase leading-none sm:text-5xl">
                 Fit Check · o duelo
               </h2>
               <p className="mt-2 max-w-md font-sans text-sm text-duck-cream/80">
-                Monte um deck com as cartas que você tem e desafie outros membros
-                do clube. A sorte decide, o estilo vence.
+                Monte um deck com as cartas que você tem e duele. A sorte decide,
+                o estilo vence. Em breve contra outros membros do clube.
               </p>
             </div>
-            <span className="flex items-center gap-2 border-2 border-duck-cream/40 px-5 py-3 font-display text-xl uppercase">
+            <Link
+              href="/duelo"
+              className="flex items-center gap-2 border-2 border-lucky-yellow bg-lucky-yellow px-6 py-3 font-display text-xl uppercase text-lucky-black transition hover:bg-transparent hover:text-lucky-yellow"
+            >
               <Swords className="h-5 w-5" />
-              Logo logo
-            </span>
+              Jogar agora
+            </Link>
           </div>
         </section>
       </main>
