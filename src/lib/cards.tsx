@@ -3,6 +3,7 @@
 import { useEffect, useSyncExternalStore } from "react";
 import { cards, rarityWeight, TOTAL_CARDS } from "@/data/cards";
 import { albumCardIds, chapters } from "@/data/album";
+import { createClient, isSupabaseConfigured } from "@/lib/supabase/client";
 import type { CardDef } from "@/types";
 
 const STORAGE_KEY = "duckco.cards.v1";
@@ -120,6 +121,48 @@ function claimDaily(): boolean {
     lastClaim: todayKey(),
   });
   return true;
+}
+
+/**
+ * Reconcile the local collection with the signed in member's cloud collection:
+ * pull what the cloud has, keep the higher count per card, and push back the
+ * copies the cloud is missing. Offline first; safe to call repeatedly.
+ */
+export async function syncCollection() {
+  if (!isSupabaseConfigured) return;
+  const supabase = createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  if (!user) return;
+
+  const { data: rows, error } = await supabase
+    .from("card_ownership")
+    .select("card_def_id")
+    .eq("user_id", user.id);
+  if (error) return;
+
+  const cloud: Record<string, number> = {};
+  for (const r of rows ?? []) {
+    cloud[r.card_def_id] = (cloud[r.card_def_id] ?? 0) + 1;
+  }
+
+  const ids = new Set([...Object.keys(snapshot.owned), ...Object.keys(cloud)]);
+  const merged: Record<string, number> = {};
+  const toInsert: { user_id: string; card_def_id: string; source: string }[] = [];
+
+  for (const id of ids) {
+    const local = snapshot.owned[id] ?? 0;
+    const remote = cloud[id] ?? 0;
+    const total = Math.max(local, remote);
+    merged[id] = total;
+    for (let i = 0; i < total - remote; i++) {
+      toInsert.push({ user_id: user.id, card_def_id: id, source: "sync" });
+    }
+  }
+
+  if (toInsert.length) await supabase.from("card_ownership").insert(toInsert);
+  commit({ ...snapshot, owned: merged });
 }
 
 // --- Hook --------------------------------------------------------------

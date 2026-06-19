@@ -3,10 +3,11 @@
 import { useState } from "react";
 import Link from "next/link";
 import { AnimatePresence, motion, useMotionValueEvent, useScroll } from "framer-motion";
-import { Menu, ShoppingBag, X } from "lucide-react";
+import { LogOut, Menu, ShoppingBag, X } from "lucide-react";
 import { MaskedAsset } from "@/components/brand/MaskedAsset";
 import { LuckMeterMini } from "@/components/game/LuckMeter";
 import { brandAssets } from "@/data/assets";
+import { handleFor, signOut, useUser } from "@/lib/auth";
 import { cn } from "@/lib/utils";
 
 const links = [
@@ -22,6 +23,7 @@ export function Nav() {
   const [solid, setSolid] = useState(false);
   const [open, setOpen] = useState(false);
   const [last, setLast] = useState(0);
+  const { user } = useUser();
 
   useMotionValueEvent(scrollY, "change", (y) => {
     setSolid(y > 40);
@@ -68,6 +70,26 @@ export function Nav() {
 
         <div className="flex items-center gap-4 text-duck-cream">
           <LuckMeterMini />
+          {user ? (
+            <button
+              onClick={() => signOut()}
+              title={`${handleFor(user)} · sair`}
+              aria-label="Sair da conta"
+              className="flex items-center gap-1.5 font-mono text-[0.65rem] uppercase tracking-widest text-lucky-yellow transition hover:text-duck-cream"
+            >
+              <span className="flex h-6 w-6 items-center justify-center rounded-full bg-lucky-yellow font-display text-sm text-lucky-black">
+                {handleFor(user).charAt(0).toUpperCase()}
+              </span>
+              <LogOut className="hidden h-4 w-4 sm:block" />
+            </button>
+          ) : (
+            <Link
+              href="/entrar"
+              className="font-mono text-[0.65rem] uppercase tracking-widest text-duck-cream/80 transition hover:text-lucky-yellow"
+            >
+              Entrar
+            </Link>
+          )}
           <button
             aria-label="Sacola"
             className="relative transition hover:text-lucky-yellow"

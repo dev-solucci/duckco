@@ -6,6 +6,7 @@ import { Footer } from "@/components/sections/Footer";
 import { Reveal } from "@/components/ui/Reveal";
 import { LuckyBadge } from "@/components/ui/LuckyBadge";
 import { PackOpener } from "@/components/cards/PackOpener";
+import { CardsSync } from "@/components/cards/CardsSync";
 import { AlbumProgress } from "@/components/cards/AlbumProgress";
 import { AlbumChapter } from "@/components/cards/AlbumChapter";
 import { Collection } from "@/components/cards/Collection";
@@ -23,6 +24,7 @@ export default function CardsPage() {
   return (
     <>
       <Nav />
+      <CardsSync />
       <main className="pt-16">
         {/* Intro + pack opening */}
         <section className="grain relative overflow-hidden border-b border-duck-cream/10 px-4 py-16 sm:px-6 sm:py-20">
