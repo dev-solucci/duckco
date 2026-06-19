@@ -6,14 +6,15 @@
  * Font variables are injected by next/font in `layout.tsx`.
  */
 @theme {
-  /* Core palette */
-  --color-lucky-black: #0b0b0b;
-  --color-duck-cream: #f3e7cf;
-  --color-lucky-yellow: #f5b700;
-  --color-money-green: #1f4d2b;
+  /* Core palette — values match the mascot artwork (see src/data/colors.ts) */
+  --color-lucky-black: #0e110c;
+  --color-duck-cream: #f6e7c5;
+  --color-lucky-yellow: #ecb71e;
+  --color-money-green: #2d783b;
   --color-street-brown: #5a3a25;
 
   /* Support palette */
+  --color-deep-green: #334023;
   --color-off-white: #f8f4ea;
   --color-deep-navy: #111827;
   --color-signal-red: #d72638;
