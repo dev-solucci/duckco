@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { Marquee } from "@/components/ui/Marquee";
@@ -16,13 +17,25 @@ export function Hero() {
       id="top"
       className="grain relative flex min-h-[100svh] flex-col justify-center overflow-hidden pt-16"
     >
-      {/* Atmosphere */}
-      <div className="pointer-events-none absolute -right-40 top-10 h-[34rem] w-[34rem] rounded-full bg-lucky-yellow/15 blur-[120px]" />
-      <div className="pointer-events-none absolute -left-32 bottom-0 h-[28rem] w-[28rem] rounded-full bg-money-green/20 blur-[120px]" />
+      {/* Background: Luke walking the street, biased to the right so the copy
+          sits on the darker left. */}
+      <div className="pointer-events-none absolute inset-0">
+        <Image
+          src={brandAssets.hero01.src}
+          alt={brandAssets.hero01.alt}
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover object-[72%_center]"
+        />
+        {/* Legibility overlays */}
+        <div className="absolute inset-0 bg-gradient-to-r from-lucky-black via-lucky-black/85 to-lucky-black/25" />
+        <div className="absolute inset-0 bg-gradient-to-t from-lucky-black via-lucky-black/20 to-lucky-black/40" />
+      </div>
 
-      <div className="relative mx-auto grid w-full max-w-7xl flex-1 grid-cols-1 items-center gap-8 px-4 py-10 sm:px-6 lg:grid-cols-12">
+      <div className="relative mx-auto w-full max-w-7xl flex-1 px-4 py-10 sm:px-6 lg:flex lg:items-center">
         {/* Copy */}
-        <div className="order-2 lg:order-1 lg:col-span-7">
+        <div className="max-w-2xl lg:max-w-xl">
           <motion.div
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
@@ -35,12 +48,12 @@ export function Hero() {
             <LuckyBadge className="text-chrome-silver">
               No. {luckyNumber("lucky-drop-001")}
             </LuckyBadge>
-            <span className="font-mono text-[0.65rem] uppercase tracking-widest text-duck-cream/60">
+            <span className="font-mono text-[0.65rem] uppercase tracking-widest text-duck-cream/70">
               {brand.mascot.name}, {brand.mascot.intlTitle}
             </span>
           </motion.div>
 
-          <h1 className="font-display uppercase leading-[0.95] text-duck-cream">
+          <h1 className="font-display uppercase leading-[0.95] text-duck-cream [text-shadow:0_2px_24px_rgba(0,0,0,0.55)]">
             {["Too", "Lucky", "To Lose"].map((word, i) => (
               <motion.span
                 key={word}
@@ -59,7 +72,7 @@ export function Hero() {
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.5, ease }}
-            className="mt-6 max-w-md font-sans text-base text-chrome-silver"
+            className="mt-6 max-w-md font-sans text-base text-duck-cream/85"
           >
             Streetwear de personagem, sorte e cultura urbana. Quem chega na Duck
             Co. já entra com a sorte no bolso.
@@ -80,32 +93,16 @@ export function Hero() {
             </a>
             <a
               href="#clube"
-              className="inline-flex items-center justify-center border-2 border-duck-cream/30 px-7 py-3.5 font-display text-xl uppercase tracking-wide text-duck-cream transition hover:border-lucky-yellow hover:text-lucky-yellow"
+              className="inline-flex items-center justify-center border-2 border-duck-cream/40 bg-lucky-black/30 px-7 py-3.5 font-display text-xl uppercase tracking-wide text-duck-cream backdrop-blur-sm transition hover:border-lucky-yellow hover:text-lucky-yellow"
             >
               Entrar no clube
             </a>
           </motion.div>
         </div>
-
-        {/* Mascot */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.85 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.9, delay: 0.2, ease }}
-          className="relative order-1 flex justify-center lg:order-2 lg:col-span-5"
-        >
-          <div className="absolute inset-0 m-auto h-64 w-64 rounded-full bg-lucky-yellow/20 blur-2xl sm:h-80 sm:w-80" />
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src={brandAssets.lukeFront.src}
-            alt={brandAssets.lukeFront.alt}
-            className="animate-float relative w-56 drop-shadow-[0_25px_45px_rgba(0,0,0,0.55)] sm:w-72 lg:w-full lg:max-w-sm"
-          />
-        </motion.div>
       </div>
 
       {/* Ticker */}
-      <div className="relative border-y-2 border-duck-cream/15 bg-lucky-black/40 py-3 font-display text-xl uppercase tracking-wide text-duck-cream">
+      <div className="relative border-y-2 border-duck-cream/15 bg-lucky-black/60 py-3 font-display text-xl uppercase tracking-wide text-duck-cream backdrop-blur-sm">
         <Marquee
           items={[
             "Too Lucky To Lose",

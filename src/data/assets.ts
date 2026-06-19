@@ -46,6 +46,13 @@ export const brandAssets = {
     alt: "Luke, the Luck Duck",
     monochrome: false,
   },
+  /** Wide hero illustration: Luke in varsity walking the street. */
+  hero01: {
+    id: "hero01",
+    src: "/brand/hero-01.png",
+    alt: "Luke, the Luck Duck",
+    monochrome: false,
+  },
 } satisfies Record<string, BrandAsset>;
 
 export type BrandAssetId = keyof typeof brandAssets;
