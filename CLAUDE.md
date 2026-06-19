@@ -3,6 +3,25 @@
 Streetwear brand site. Mascot **Luke, the Luck Duck**; slogan **Too Lucky To Lose**.
 Stack: Next.js 16 (App Router) · React 19 · TypeScript strict · Tailwind 4.
 
+## Project rules (always honor)
+
+1. **Gamified direction.** The store is built as an experience with game
+   mechanics (luck, levels, unlocks, collecting), not a plain catalog. See the
+   gamification section in [`docs/visual-reference.md`](docs/visual-reference.md).
+2. **No hyphen / dash characters in any user facing copy.** Never use `-` or
+   `—` in visible text, UI strings or prose. Rewrite around it (split into two
+   sentences, use "e", "até", parentheses, a colon). The ONLY exceptions are
+   where the platform requires kebab case: file names, CSS variable / Tailwind
+   token ids, and URL slugs.
+3. **Never use emojis.** Anywhere: UI, copy, commits, chat.
+4. **Always use the design skills** when building or styling any UI
+   (`frontend-design`, `web-design-guidelines`, `landing-page-design`,
+   `emil-design-eng`, `design-critique`). Invoke them, do not freehand.
+5. **Always follow usability and design best practices** (accessibility,
+   hierarchy, contrast, touch targets, focus states).
+6. **Do not skimp on components or interactivity.** Rich, polished, animated.
+7. **Mobile first, always responsive.** Every screen works on small viewports.
+
 ## Conventions
 
 - **Brand data is the source of truth.** Pull copy, colors, drops and mascot

@@ -104,7 +104,42 @@ O que torna a loja "nova/diferente":
 | Luke com personalidade | Logo parado e sem alma |
 | Badge de número/ticket | Cassino óbvio (cartas, fichas, dados em excesso) |
 | Respiro + 1 punch de energia | Tela cheia e barulhenta |
-| Premium e cru ao mesmo tempo | Limpo-startup ou moto-macho |
+| Premium e cru ao mesmo tempo | Limpo startup ou moto macho |
+
+---
+
+## 9. Camada de gamificação (regra central do projeto)
+
+A loja não é catálogo, é experiência. A sorte vira mecânica de jogo. Tudo
+abaixo deve nascer de dados tipados (futuro `src/data/game.ts`) e respeitar
+usabilidade, acessibilidade e mobile first.
+
+**Conceito guia:** entrar na Duck Co. é entrar no _Lucky Duck Club_. O visitante
+acumula sorte, sobe de nível e desbloqueia coisas. Quanto mais joga, mais a
+marca conspira a favor dele.
+
+Mecânicas (do leve ao forte):
+- **Luck Meter.** Um medidor de sorte persistente no topo que enche conforme o
+  visitante navega, interage e compra. Estética de barra de energia de game.
+- **Daily Spin.** Roleta diária do Luke (estilo odômetro) que dá cupom, sticker
+  digital ou prévia de drop. Animação de número girando.
+- **Níveis do clube.** Rookie, Lucky, Hot Streak, Too Lucky To Lose. Cada nível
+  abre acesso antecipado a drops e peças exclusivas.
+- **Colecionar o Luke.** As 7 personas viram colecionáveis digitais; completar a
+  coleção desbloquea recompensa. Conecta com os stickers físicos.
+- **Lucky Number.** Cada peça e cada pedido recebe um número da sorte (placa de
+  corrida). Números premiados geram brindes.
+- **Streak.** Voltar em dias seguidos aumenta a sorte. Reforça hábito sem ser
+  agressivo.
+- **Scratch / reveal.** Card de "raspadinha" no checkout ou no unboxing digital.
+- **Quests leves.** "Monte um look", "siga no Instagram", "primeiro drop" dão
+  XP de sorte.
+
+Regras de bom gosto (para não virar cassino nem joguinho infantil):
+- A gamificação é **tempero premium**, não o prato. Nunca polui o produto.
+- Feedback satisfatório: micro animações, som opcional, haptics no mobile.
+- Honesto e acessível: estados de foco, sem padrões escuros, recompensa real.
+- Tudo funciona e é bonito **no mobile primeiro**.
 
 ---
 
