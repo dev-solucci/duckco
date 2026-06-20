@@ -82,7 +82,7 @@ export const cards: CardDef[] = [
     stats: { estilo: 84, sorte: 40, flow: 82, hype: 95 },
     line: "Tudo dá errado, mas ele continua estiloso.",
     art: "bad-luck-luke",
-    ability: "Inverte o resultado do round uma vez por partida.",
+    ability: "Não perde o round em que entra.",
   },
 
   // --- Gear (the drop pieces) ---
@@ -137,7 +137,7 @@ export const cards: CardDef[] = [
     stats: { estilo: 40, sorte: 88, flow: 44, hype: 50 },
     line: "Sorte no bolso.",
     art: "clover",
-    ability: "Soma sorte ao round.",
+    ability: "Soma vantagem ao round.",
   },
   {
     id: "moeda",
@@ -148,7 +148,7 @@ export const cards: CardDef[] = [
     stats: { estilo: 42, sorte: 84, flow: 48, hype: 56 },
     line: "Cara você ganha, coroa você ganha.",
     art: "coin",
-    ability: "Refaz a vibe do round uma vez.",
+    ability: "Soma vantagem ao round.",
   },
   {
     id: "numero-7",

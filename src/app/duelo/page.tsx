@@ -21,9 +21,9 @@ export default function DuelPage() {
               Fit Check
             </h1>
             <p className="mt-3 max-w-xl font-sans text-sm text-chrome-silver">
-              Cada round abre um contexto de rua e a sorte decide qual atributo
-              conta. As habilidades das personas viram o jogo. Em breve, contra
-              outros membros do clube.
+              Cada round abre um contexto de rua que define qual atributo conta.
+              A carta certa na hora certa vence. As habilidades das personas
+              viram o jogo. Em breve, contra outros membros do clube.
             </p>
           </div>
         </section>

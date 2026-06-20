@@ -75,10 +75,10 @@ const typeLabel: Record<CardType, string> = {
 };
 
 const STAT_KEYS = [
-  ["estilo", "EST"],
-  ["sorte", "SOR"],
-  ["flow", "FLW"],
-  ["hype", "HYP"],
+  ["estilo", "Estilo"],
+  ["sorte", "Sorte"],
+  ["flow", "Flow"],
+  ["hype", "Hype"],
 ] as const;
 
 function CardArt({ card }: { card: CardDef }) {
@@ -215,21 +215,23 @@ export function Card({
         </span>
       </div>
 
-      {/* Text box (parchment) */}
-      <div className="flex flex-col gap-0.5 rounded-sm bg-duck-cream px-1.5 py-1 text-lucky-black">
+      {/* Ability plus stat boxes */}
+      <div className="rounded-sm bg-duck-cream p-1.5 text-lucky-black">
         {card.ability && (
-          <p className="text-[8px] font-semibold leading-tight">{card.ability}</p>
+          <p className="mb-1 text-[8px] font-semibold leading-tight">
+            {card.ability}
+          </p>
         )}
-        <p className="line-clamp-2 text-[7px] italic leading-snug text-lucky-black/70">
-          {card.line}
-        </p>
-        <div className="mt-0.5 grid grid-cols-4 gap-0.5 border-t border-lucky-black/15 pt-1">
-          {STAT_KEYS.map(([key, short]) => (
-            <div key={key} className="flex flex-col items-center leading-none">
-              <span className="font-mono text-[6px] uppercase tracking-wider text-lucky-black/55">
-                {short}
+        <div className="grid grid-cols-2 gap-1">
+          {STAT_KEYS.map(([key, label]) => (
+            <div
+              key={key}
+              className="flex items-center justify-between rounded border border-lucky-black/15 bg-lucky-black/[0.04] px-1.5 py-1"
+            >
+              <span className="font-mono text-[7px] uppercase tracking-wide text-lucky-black/55">
+                {label}
               </span>
-              <span className="font-display text-[13px] leading-none text-money-green">
+              <span className="font-display text-base leading-none text-money-green">
                 {card.stats[key]}
               </span>
             </div>

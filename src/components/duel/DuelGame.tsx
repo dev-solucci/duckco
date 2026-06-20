@@ -264,9 +264,9 @@ export function DuelGame() {
             </div>
             <p className="mt-5 text-center font-display text-3xl uppercase text-lucky-yellow">
               {result.winner === "player" ? "Round seu" : "Round do bot"}
-              {result.inverted && (
+              {result.stolen && (
                 <span className="block font-mono text-xs text-signal-red">
-                  Bad Luck Luke virou o jogo
+                  Bad Luck Luke salvou o round
                 </span>
               )}
             </p>
@@ -355,10 +355,9 @@ function Played({
       </div>
       <div className="text-center font-mono text-xs text-duck-cream">
         <span className="text-lg font-bold text-lucky-yellow">{data.score.total}</span>
-        <div className="text-[0.6rem] text-chrome-silver">
-          base {data.score.base}
-          {data.score.bonus > 0 && ` +${data.score.bonus}`} · sorte +{data.score.luck}
-        </div>
+        {data.score.note && (
+          <div className="text-[0.6rem] text-money-green">{data.score.note}</div>
+        )}
       </div>
     </div>
   );

@@ -98,8 +98,8 @@ export default function CardsPage() {
                 Fit Check · o duelo
               </h2>
               <p className="mt-2 max-w-md font-sans text-sm text-duck-cream/80">
-                Monte um deck com as cartas que você tem e duele. A sorte decide,
-                o estilo vence. Em breve contra outros membros do clube.
+                Monte um deck com as cartas que você tem e duele. A carta certa
+                na hora certa vence. Em breve contra outros membros do clube.
               </p>
             </div>
             <Link

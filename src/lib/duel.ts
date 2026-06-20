@@ -42,17 +42,21 @@ export interface CardScore {
   base: number;
   doubled: boolean;
   bonus: number;
-  luck: number;
   total: number;
   note?: string;
 }
 
-/** Score a card in a context. Skill (the favored stat) plus luck upside. */
-export function cardScore(
-  card: CardDef,
-  ctx: Context,
-  withLuck = true,
-): CardScore {
+/** Flat charm bonuses added to the round, deterministic. */
+const flatBonus: Record<string, number> = {
+  trevo: 15,
+  moeda: 15,
+};
+
+/**
+ * Score a card in a context. Pure skill: the favored stat (doubled by some
+ * abilities) plus deterministic charm bonuses. No randomness.
+ */
+export function cardScore(card: CardDef, ctx: Context): CardScore {
   let base = card.stats[ctx.stat];
   let doubled = false;
   let note: string | undefined;
@@ -63,17 +67,23 @@ export function cardScore(
     note = "Habilidade: dobra";
   }
 
-  let bonus = 0;
-  if (card.id === "trevo") {
-    bonus += 20;
-    note = "Trevo: mais sorte";
-  }
+  const bonus = flatBonus[card.id] ?? 0;
+  if (bonus) note = `Charm: +${bonus}`;
 
-  const luck = withLuck
-    ? Math.floor(Math.random() * (Math.round(card.stats.sorte / 7) + 1))
-    : 0;
+  return { base, doubled, bonus, total: base + bonus, note };
+}
 
-  return { base, doubled, bonus, luck, total: base + bonus + luck, note };
+/** Cards that win a tie. */
+const winsTies = (c: CardDef) => c.id === "numero-7" || c.id === "luke-classic";
+
+function breakTie(a: CardDef, b: CardDef): "player" | "bot" {
+  if (winsTies(a) !== winsTies(b)) return winsTies(a) ? "player" : "bot";
+  if (a.stats.sorte !== b.stats.sorte)
+    return a.stats.sorte > b.stats.sorte ? "player" : "bot";
+  const sum = (c: CardDef) =>
+    c.stats.estilo + c.stats.sorte + c.stats.flow + c.stats.hype;
+  if (sum(a) !== sum(b)) return sum(a) > sum(b) ? "player" : "bot";
+  return "player";
 }
 
 export interface RoundResult {
@@ -81,7 +91,8 @@ export interface RoundResult {
   player: { card: CardDef; score: CardScore };
   bot: { card: CardDef; score: CardScore };
   winner: "player" | "bot";
-  inverted: boolean;
+  /** True when Bad Luck Luke saved a losing round. */
+  stolen: boolean;
 }
 
 export function resolveRound(
@@ -93,22 +104,17 @@ export function resolveRound(
   const b = cardScore(botCard, ctx);
 
   let winner: "player" | "bot";
-  if (p.total === b.total) {
-    if (playerCard.id === "numero-7") winner = "player";
-    else if (botCard.id === "numero-7") winner = "bot";
-    else winner = playerCard.stats.sorte >= botCard.stats.sorte ? "player" : "bot";
-  } else {
-    winner = p.total > b.total ? "player" : "bot";
-  }
+  if (p.total === b.total) winner = breakTie(playerCard, botCard);
+  else winner = p.total > b.total ? "player" : "bot";
 
-  // Bad Luck Luke can flip the round.
-  let inverted = false;
-  if (
-    (playerCard.id === "bad-luck-luke" || botCard.id === "bad-luck-luke") &&
-    Math.random() < 0.4
-  ) {
-    winner = winner === "player" ? "bot" : "player";
-    inverted = true;
+  // Bad Luck Luke does not lose the round it enters. Deterministic.
+  let stolen = false;
+  if (winner === "bot" && playerCard.id === "bad-luck-luke") {
+    winner = "player";
+    stolen = true;
+  } else if (winner === "player" && botCard.id === "bad-luck-luke") {
+    winner = "bot";
+    stolen = true;
   }
 
   return {
@@ -116,14 +122,14 @@ export function resolveRound(
     player: { card: playerCard, score: p },
     bot: { card: botCard, score: b },
     winner,
-    inverted,
+    stolen,
   };
 }
 
-/** Greedy bot: play the card with the best effective stat for the context. */
+/** Bot plays the strongest card for the context. */
 export function botPick(hand: CardDef[], ctx: Context): CardDef {
   return [...hand].sort(
-    (a, b) => cardScore(b, ctx, false).total - cardScore(a, ctx, false).total,
+    (a, b) => cardScore(b, ctx).total - cardScore(a, ctx).total,
   )[0];
 }
 
