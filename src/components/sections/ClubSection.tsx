@@ -1,7 +1,9 @@
+import Image from "next/image";
 import { Reveal } from "@/components/ui/Reveal";
 import { LuckMeterFull } from "@/components/game/LuckMeter";
 import { ClubLevels } from "@/components/game/ClubLevels";
 import { DailySpin } from "@/components/game/DailySpin";
+import { brandAssets } from "@/data/assets";
 
 export function ClubSection() {
   return (
@@ -36,17 +38,35 @@ export function ClubSection() {
             </div>
           </Reveal>
 
-          {/* Daily spin */}
+          {/* Daily spin, framed like a lucky ticket with the Luke stamp */}
           <Reveal
             delay={0.1}
-            className="flex flex-col items-center justify-center border-2 border-lucky-black bg-lucky-black px-6 py-12 text-duck-cream"
+            className="relative flex flex-col items-center justify-center overflow-hidden rounded-2xl border-4 border-money-green bg-deep-green px-6 pb-12 pt-16 text-duck-cream shadow-[0_24px_60px_-24px_rgba(0,0,0,0.55)]"
           >
-            <span className="mb-1 font-mono text-xs uppercase tracking-widest text-lucky-yellow">
-              Uma vez por dia
+            {/* Dashed ticket inner frame */}
+            <span
+              aria-hidden
+              className="pointer-events-none absolute inset-2.5 rounded-xl border-2 border-dashed border-lucky-yellow/40"
+            />
+
+            {/* Stamp slapped on top, crooked */}
+            <Image
+              src={brandAssets.stamp.src}
+              alt={brandAssets.stamp.alt}
+              width={120}
+              height={120}
+              className="absolute -top-3 left-1/2 z-10 w-20 -translate-x-1/2 -rotate-6 drop-shadow-[0_6px_14px_rgba(0,0,0,0.45)]"
+            />
+
+            <span className="relative mt-2 font-mono text-xs uppercase tracking-[0.3em] text-lucky-yellow">
+              Gira uma vez por dia
             </span>
-            <h3 className="mb-8 font-display text-3xl uppercase sm:text-4xl">
-              Daily Spin do Luke
+            <h3 className="relative mb-2 mt-1 font-display text-4xl uppercase leading-none text-duck-cream sm:text-5xl">
+              Roleta da Sorte
             </h3>
+            <p className="relative mb-8 max-w-xs text-center font-sans text-sm text-duck-cream/75">
+              Puxe a sorte do Luke e leve cupom, sticker ou acesso a drop.
+            </p>
             <DailySpin />
           </Reveal>
         </div>

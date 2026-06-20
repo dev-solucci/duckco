@@ -9,6 +9,7 @@ import { HeroProductCard } from "@/components/sections/HeroProductCard";
 import { brandAssets } from "@/data/assets";
 import { brand } from "@/lib/brand";
 import { luckyNumber } from "@/data/game";
+import { cn } from "@/lib/utils";
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
@@ -61,8 +62,10 @@ export function Hero() {
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.7, delay: 0.1 + i * 0.1, ease }}
-                className="block text-[clamp(3.5rem,13vw,9rem)]"
-                style={i === 1 ? { color: "var(--color-lucky-yellow)" } : undefined}
+                className={cn(
+                  "block text-[clamp(3.5rem,13vw,9rem)]",
+                  i === 1 && "text-sweep",
+                )}
               >
                 {word}
               </motion.span>
