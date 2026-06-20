@@ -1,5 +1,7 @@
+import Image from "next/image";
 import { Clover, Coins, Ticket } from "lucide-react";
 import { brandAssets } from "@/data/assets";
+import { cardArt } from "@/data/cardArt";
 import type { CardDef, CardRarity, CardType } from "@/types";
 import { cn } from "@/lib/utils";
 
@@ -178,8 +180,21 @@ export function Card({
           frame.art,
         )}
       >
+        {(() => {
+          const art = card.image ?? cardArt[card.id];
+          return art ? (
+            <Image
+              src={art}
+              alt={card.name}
+              fill
+              sizes="(max-width: 768px) 45vw, 220px"
+              className="object-cover"
+            />
+          ) : (
+            <CardArt card={card} />
+          );
+        })()}
         <div className="pointer-events-none absolute inset-0 shadow-[inset_0_0_18px_rgba(0,0,0,0.45)]" />
-        <CardArt card={card} />
         {count > 1 && (
           <span className="absolute bottom-1 right-1 rounded-[2px] bg-lucky-black/75 px-1 py-0.5 font-mono text-[8px] font-bold leading-none text-lucky-yellow">
             x{count}

@@ -74,8 +74,10 @@ export interface CardDef {
   stats: CardStats;
   /** Short flavor / comic line. */
   line: string;
-  /** Persona variant id, or charm glyph key, used to pick the art. */
+  /** Persona variant id, or charm glyph key, used to pick the procedural art. */
   art?: string;
+  /** Real card art path under /brand/cards. Overrides the procedural art. */
+  image?: string;
   /** Special ability text (personas / rares), used later by the duel. */
   ability?: string;
 }
